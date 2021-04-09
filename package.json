@@ -5,16 +5,16 @@
     "email": "ibraimov0409@gmail.com",
     "name": "Jasur Ibraimov"
   },
+  "description": "None-commerce App for company <kvartirka.com>",
+  "keywords": [
+    "Armaggedon-V",
+    "React",
+    "NASA Open API"
+  ],
   "repository": {
     "type": "Github",
     "url": ""
   },
-  "description": "None-commerce application as a task for company <kvartirka.com>",
-  "keywords": [
-    "Armaggedon V",
-    "React",
-    "NASA Open API"
-  ],
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -22,6 +22,7 @@
     "@testing-library/user-event": "^12.1.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
@@ -29,7 +30,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write src/**/*.jsx",
+    "lint": "eslint src/**/*.jsx",
+    "lint-fix": "npm run lint -- --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -50,8 +54,14 @@
     ]
   },
   "devDependencies": {
-    "eslint": "^7.23.0",
-    "eslint-config-google": "^0.14.0",
-    "eslint-plugin-react": "^7.23.2"
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "prettier": "^2.2.1"
   }
 }
