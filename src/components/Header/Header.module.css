@@ -1,0 +1,28 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 37px 0 24px 0;
+    border-bottom: 1px solid #000;
+}
+
+.title {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 16px;
+    max-width: 414px;
+}
+
+.nav a {
+    margin-right: 24px;
+    font-size: 16px;
+    color: #000;
+}
+
+
+.nav a:last-child {
+    margin-right: 0;
+}

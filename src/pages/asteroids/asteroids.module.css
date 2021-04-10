@@ -1,0 +1,31 @@
+.pageContainer {
+    padding: 26px 0px;
+}
+.filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.filters div {
+    display: flex;
+    align-items: center;
+}
+.filters input {
+    margin-right: 10px;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+}
+.filters button {
+    margin-left: 5px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    background-color: transparent;
+    text-decoration: underline;
+}
+button.activeFilter {
+    text-decoration: none;
+    font-weight: 600;
+}

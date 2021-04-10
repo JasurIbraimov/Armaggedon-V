@@ -1,0 +1,15 @@
+.box {
+    background-color: transparent;   
+    text-align: center;
+    padding: 24px;
+}
+
+.errorImg {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+.box p {
+    font-size: 20px;
+    font-weight: 600;
+}

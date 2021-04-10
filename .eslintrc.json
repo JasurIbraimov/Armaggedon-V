@@ -1,4 +1,4 @@
-module.exports = {
+{
     "settings": {
         "react": {
           "version": "detect", 
@@ -10,11 +10,10 @@ module.exports = {
         "es2021": true
     },
     "extends": [
-        "eslint:recommended",
         "plugin:react/recommended",
-        'airbnb/hooks',
-        'plugin:prettier/recommended',
+        "plugin:prettier/recommended"
     ],
+    "parser": "babel-eslint",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -23,22 +22,21 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react", "prettier"
     ],
     "rules": {
         "prettier/prettier": [
             "error",
             {
                 "printWidth": 80,
-                "trailingComma": "es5",
+                "trailingComma": "none",
                 "semi": true,
                 "jsxSingleQuote": true,
                 "singleQuote": true,
                 "useTabs": true,
                 "bracketSpacing": true,
-                "jsxBracketSameLine": true,
-                "tabWidth": 4
+                "jsxBracketSameLine": true
             }
         ]
     }
-};
+}

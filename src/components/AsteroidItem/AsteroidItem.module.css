@@ -1,0 +1,85 @@
+.item {
+    width: 100%;
+    display: flex;
+    margin-top: 16px;
+    position: relative;
+    border: 1px solid #000;
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 10px;
+    padding: 24px;
+    padding-bottom: 40px;
+    overflow: hidden;
+    background: linear-gradient(90deg, #CFF37D 0%, #7DE88C 100%);
+}
+.hazardous {
+    background: linear-gradient(90deg, #FFB199 0%, #FF0844 100%);
+}
+.item img{
+    position: absolute;
+}
+
+.asteroidImg {
+    top: 14%;
+    left: 13%;
+}
+
+.biggerAsteroidImg {
+    width: 190px;
+    height: 190px;
+    left: 8%;
+    top: -38%;
+}
+.biggestAsteroidImg {
+    width: 598px;
+    height: 607px;
+    left: -10%;
+    top: -230%;
+}
+.dinoImg {
+    bottom: 0;
+    z-index: 1;
+    left: 16px;
+}
+
+.item button {
+    background-color: #186DD6;
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 24px;
+    cursor: pointer;
+    padding: 14px 16px;
+    outline: none;
+}
+.link {
+    font-weight: 700;
+    font-size: 24px;
+    text-decoration: underline;
+    color: #000;
+}
+.data {
+    z-index: 2;
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.info {
+    width: 52%;
+}
+.info ul {
+    margin-top: 16px;
+}
+.info ul li {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.actions {
+    text-align: center;
+}
+.rate p{
+    margin-bottom: 10px;
+    font-weight: 600;
+}
