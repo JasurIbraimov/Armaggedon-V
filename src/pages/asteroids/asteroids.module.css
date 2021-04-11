@@ -29,3 +29,9 @@ button.activeFilter {
     text-decoration: none;
     font-weight: 600;
 }
+
+.dataContainer {
+    padding: 0px 10px;
+    height: 71vh;
+    overflow-y: scroll;
+}

@@ -42,16 +42,6 @@
     left: 16px;
 }
 
-.item button {
-    background-color: #186DD6;
-    border: none;
-    color: #fff;
-    font-size: 16px;
-    border-radius: 24px;
-    cursor: pointer;
-    padding: 14px 16px;
-    outline: none;
-}
 .link {
     font-weight: 700;
     font-size: 24px;

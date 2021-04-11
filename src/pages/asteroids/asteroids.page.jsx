@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import s from './asteroids.module.css';
 import { getAllNEAsteroids } from '../../api';
 import PropTypes from 'prop-types';
@@ -6,133 +6,115 @@ import PropTypes from 'prop-types';
 import AsteroidItem from '../../components/AsteroidItem/AsteroidItem.component';
 import CustomLoader from '../../components/CustomLoader/CustomLoader.component';
 import CustomError from '../../components/CustomError/CustomError.component';
-class AsteroidsPage extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			data: window.NEO,
-			nextUrl: '',
-			isFetching: false,
-			onlyHazardousMode: false,
-			distanceMode: 'km',
-			isErrored: false
-		};
-	}
-	componentDidMount = async () => {
-		// await this.setAsteroidsData();
-		// let isScrolling;
-		// window.addEventListener('scroll', () => {
-		// 	if (
-		// 		window.innerHeight + document.documentElement.scrollTop ===
-		// 		document.documentElement.offsetHeight
-		// 	) {
-		// 		window.clearTimeout(isScrolling);
-		// 		isScrolling = setTimeout(() => {
-		// 			console.log('Scrolling has stopped.');
-		// 		}, 1000);
-		// 	}
-		// 	if (isScrolling) {
-		// 		console.log('Scrolling');
-		// 		this.setState(() => ({ isFetching: true }));
-		// 		console.log(this.state.isFetching);
-		// 	}
-		// });
+import CustomButton from '../../components/CustomButton/CustomButton.component';
+const AsteroidsPage = ({ addToDestroyData, checkDestroyData }) => {
+	const elementRef = useRef();
+	const [data, setData] = useState([]);
+	const [fetchingURL, setFetchingURL] = useState('');
+	const [nextTargetURL, setNextTargetURL] = useState('');
+	const [isFetching, setIsFetching] = useState(false);
+	const [isBottom, setIsBottom] = useState(true);
+	const [isErrored, setIsErrored] = useState(false);
+	const [onlyHazardousMode, setOnlyHazardousMode] = useState(false);
+	const [distanceMode, setDistanceMode] = useState('km');
+
+	const handleDistanceModeChange = (e) => {
+		const { value } = e.target;
+		setDistanceMode(value);
 	};
-	setAsteroidsData = async () => {
-		this.setState({ isFetching: true });
-		try {
-			const { data, nextUrl } = await getAllNEAsteroids();
-			this.setState((prev) => ({
-				data: [...prev.data, ...data],
-				nextUrl
-			}));
-		} catch (e) {
-			console.log(e);
-			this.setState({ isErrored: true });
-		} finally {
-			this.setState({ isFetching: false });
+	const toggleHazardousMode = () => {
+		setOnlyHazardousMode((prev) => !prev);
+	};
+
+	const handleScroll = () => {
+		const scroller = elementRef.current;
+		if (scroller.scrollHeight - scroller.scrollTop === scroller.clientHeight) {
+			setIsBottom(true);
+			setNextTargetURL(fetchingURL);
 		}
 	};
-	setDistanceMode = (e) => {
-		const { value } = e.target;
-		this.setState({ distanceMode: value });
-	};
-	toggleHazardousMode = () => {
-		this.setState((prev) => ({
-			onlyHazardousMode: !prev.onlyHazardousMode
-		}));
-	};
-	render() {
-		console.log(this.props);
-		const { match, history } = this.props;
-		const {
-			onlyHazardousMode,
-			distanceMode,
-			data,
-			isFetching,
-			isErrored
-		} = this.state;
-		const loading = isFetching ? (
-			<CustomLoader loaderLabel='В поисках мищени...' />
-		) : (
-			''
-		);
-		const errored = isErrored ? (
-			<CustomError errorLabel='Ошибка! Мы не смогли найти врагов.' />
-		) : (
-			''
-		);
-		const correctData =
-			data.length > 0
-				? onlyHazardousMode
-					? data.filter((item) => item.isHazardous)
-					: data
-				: null;
-		const loadedDataWithNoError =
-			!loading && !errored
-				? correctData &&
-				  correctData.map(({ id, distanceModes, ...otherProps }) => (
-						<AsteroidItem
-							key={id}
-							asteroidId={id}
-							distance={distanceModes[distanceMode]}
-							{...otherProps}
-						/>
-				  ))
-				: '';
-		return (
-			<div className={s.pageContainer}>
-				<div className={s.filters}>
-					<div>
-						<input onChange={this.toggleHazardousMode} type='checkbox' />
-						<label>Показать только опасные</label>
-					</div>
-					<div>
-						<label>Расстояние</label>
-						<button
-							value='km'
-							className={distanceMode === 'km' ? s.activeFilter : ''}
-							onClick={this.setDistanceMode}>
-							в километрах
-						</button>
-						,
-						<button
-							value='lunar'
-							className={distanceMode === 'lunar' ? s.activeFilter : ''}
-							onClick={this.setDistanceMode}>
-							в дистанциях до луны
-						</button>
-					</div>
+
+	useEffect(() => {
+		const loadingData = () => {
+			setIsFetching(true);
+			getAllNEAsteroids(nextTargetURL)
+				.then(({ dataList, next }) => {
+					setData((prev) => [...prev, ...dataList]);
+					setFetchingURL(next);
+				})
+				.catch((e) => {
+					console.log(e);
+					setIsErrored(true);
+				})
+				.finally(() => {
+					setIsFetching(false);
+				});
+		};
+
+		if (isBottom) {
+			loadingData();
+			setIsBottom(false);
+		}
+	}, [isBottom, nextTargetURL]);
+	const correctData =
+		data.length > 0
+			? onlyHazardousMode
+				? data.filter((item) => item.isHazardous)
+				: data
+			: null;
+	const loading = isFetching && (
+		<CustomLoader loaderLabel='В поисках мишени...' />
+	);
+	const errored = isErrored && (
+		<CustomError errorLabel='Ошибка! Мы не смогли найти врага.' />
+	);
+	return (
+		<div className={s.pageContainer}>
+			<div className={s.filters}>
+				<div>
+					<input onChange={toggleHazardousMode} type='checkbox' />
+					<label>Показать только опасные</label>
 				</div>
-				{loadedDataWithNoError}
+				<div>
+					<label>Расстояние</label>
+					<button
+						value='km'
+						className={distanceMode === 'km' ? s.activeFilter : ''}
+						onClick={handleDistanceModeChange}>
+						в километрах
+					</button>
+					,
+					<button
+						value='lunar'
+						className={distanceMode === 'lunar' ? s.activeFilter : ''}
+						onClick={handleDistanceModeChange}>
+						в дистанциях до луны
+					</button>
+				</div>
+			</div>
+			<div className={s.dataContainer} onScroll={handleScroll} ref={elementRef}>
+				{correctData &&
+					correctData.map((d, index) => (
+						<AsteroidItem
+							key={index}
+							distance={d.distanceModes[distanceMode]}
+							{...d}>
+							<CustomButton
+								onClick={() => addToDestroyData(d)}
+								btnLabel={
+									checkDestroyData(d.id) ? 'Помиловать' : 'На уничтожение'
+								}
+							/>
+						</AsteroidItem>
+					))}
 				{loading}
 				{errored}
 			</div>
-		);
-	}
-}
+		</div>
+	);
+};
 AsteroidsPage.propTypes = {
-	history: PropTypes.object,
-	match: PropTypes.object
+	addToDestroyData: PropTypes.func,
+	checkDestroyData: PropTypes.func
 };
 export default AsteroidsPage;

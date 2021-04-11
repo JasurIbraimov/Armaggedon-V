@@ -1,0 +1,24 @@
+.title {
+    font-size: 16px;
+    border: 1px solid rgb(209, 209, 209);
+    padding: 5px;
+}
+.list {
+    height: 250px;
+    border: 1px solid rgb(209, 209, 209);
+    border-top: none;
+    overflow-y: scroll;
+}
+
+.list li {
+    border-bottom: 1px solid rgb(209, 209, 209);
+    padding: 10px;
+}
+
+.list li:last-child {
+    border-bottom: none;
+}
+.list li p {
+    display: flex;
+    justify-content: space-between;
+}

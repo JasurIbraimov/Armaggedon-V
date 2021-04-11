@@ -1,0 +1,9 @@
+.empty {
+    font-size: 24px;
+    color: rgb(209, 209, 209);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-transform: uppercase;
+}

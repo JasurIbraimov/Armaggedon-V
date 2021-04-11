@@ -1,74 +1,103 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import s from './asteroid.module.css';
 import { getNEAsteroidInfoById } from '../../api';
+import { useRouteMatch } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import AsteroidImg from '../../assets/img/asteroid.svg';
 // Components
 import CustomLoader from '../../components/CustomLoader/CustomLoader.component';
 import CustomError from '../../components/CustomError/CustomError.component';
-class AsteroidPage extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			data: [],
-			isFetching: false,
-			isErrored: false
+import CustomButton from '../../components/CustomButton/CustomButton.component';
+import ApproachList from '../../components/ApproachList/ApproachList.component';
+const AsteroidPage = ({ addToDestroyData, checkDestroyData }) => {
+	const [data, setData] = useState(null);
+	const [isFetching, setIsFetching] = useState(false);
+	const [isErrored, setIsErrored] = useState(false);
+	const match = useRouteMatch();
+	useEffect(() => {
+		const loadingData = () => {
+			setIsFetching(true);
+			getNEAsteroidInfoById(match.params.asteroidId)
+				.then((data) => {
+					setData(data);
+				})
+				.catch((e) => {
+					console.log(e);
+					setIsErrored(true);
+				})
+				.finally(() => {
+					setIsFetching(false);
+				});
 		};
-	}
-	componentDidMount = async () => {
-		await this.setAsteroidData();
-	};
-	setAsteroidData = async () => {
-		const { match } = this.props;
-
-		this.setState({ isFetching: true });
-		try {
-			const data = await getNEAsteroidInfoById(match.params.asteroidId);
-			this.setState({ data });
-		} catch (e) {
-			console.log(e);
-			this.setState({ isErrored: true });
-		} finally {
-			this.setState({ isFetching: false });
-		}
-	};
-
-	render() {
-		console.log(this.props);
-		const { data, isFetching, isErrored } = this.state;
-		const loading = isFetching ? (
-			<CustomLoader loaderLabel='В поисках мищени...' />
-		) : (
-			''
-		);
-		const errored = isErrored ? (
-			<CustomError errorLabel='Ошибка! Мы не смогли найти врагов.' />
-		) : (
-			''
-		);
-		const correctData = data.length > 0 ? data : null;
-
-		// const loadedDataWithNoError =
-		// 	!loading && !errored
-		// 		? correctData &&
-		// 		  correctData.map(({ id, distanceModes, ...otherProps }) => (
-		// 				<AsteroidItem
-		// 					key={id}
-		// 					asteroidId={id}
-		// 					distance={distanceModes[distanceMode]}
-		// 					{...otherProps}
-		// 				/>
-		// 		  ))
-		// 		: '';
-		return (
-			<div className={s.pageContainer}>
-				{loading}
-				{errored}
-			</div>
-		);
-	}
-}
+		loadingData();
+	}, []);
+	const loading = isFetching && (
+		<CustomLoader loaderLabel='В поисках мишени...' />
+	);
+	const errored = isErrored && (
+		<CustomError errorLabel='Ошибка! Мы не смогли найти врага.' />
+	);
+	return (
+		<div className={s.pageContainer}>
+			{data ? (
+				<div className={s.infoCard}>
+					<div className={s.selfInfo}>
+						<div>
+							<h2>{data.name}</h2>
+							<p className={data.isHazardous ? s.hazardous : s.safe}>
+								Оценка опасности:
+								<span>{data.isHazardous ? 'опасен' : 'не опасен'}</span>
+							</p>
+							<p>
+								Размер: <span>{data.diameterInM} м</span>
+							</p>
+							<div className={s.imgContainer}>
+								<img
+									className={
+										data.diameterInM >= 850
+											? s.biggestAsteroidImg
+											: data.diameterInM >= 300
+											? s.biggerAsteroidImg
+											: s.smallAsteroidImg
+									}
+									src={AsteroidImg}
+									alt='Asteroid'
+								/>
+							</div>
+						</div>
+						<div>
+							<CustomButton
+								onClick={() => addToDestroyData(data)}
+								btnLabel={
+									checkDestroyData(data.id) ? 'Помиловать' : 'На уничтожение'
+								}
+							/>
+						</div>
+					</div>
+					<div className={s.approachInfo}>
+						<ApproachList
+							title='Сближения с Землей:'
+							isNamed
+							dataList={data.approachData.filter(
+								(item) => item.orbitingBody === 'Earth'
+							)}
+						/>
+						<ApproachList
+							title='Остальные сближения:'
+							dataList={data.approachData.filter(
+								(item) => item.orbitingBody !== 'Earth'
+							)}
+						/>
+					</div>
+				</div>
+			) : (
+				loading || errored
+			)}
+		</div>
+	);
+};
 AsteroidPage.propTypes = {
-	history: PropTypes.object,
-	match: PropTypes.object
+	addToDestroyData: PropTypes.func,
+	checkDestroyData: PropTypes.func
 };
 export default AsteroidPage;

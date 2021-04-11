@@ -1,0 +1,41 @@
+.squad {
+    width: 115px;
+    height: 115px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    transition: .25s;
+    cursor: pointer;
+    animation: rotate 5s linear infinite;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.7);
+    position: relative;
+}
+.squad img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.squad:hover {
+    transform: scale(1.1);
+}
+.squad::before {
+    content: 'Вызвать отряд!';
+    width: 100%;
+    color: #fff;
+    padding: 10px;
+    font-size: 14px;
+    background-color: #186DD6;
+    position: absolute;
+    top: -50%;
+    visibility: hidden;
+    opacity: 0;
+    transition: .5s top, .25s opacity;
+    border-radius: 10px;
+    left: -100%;
+}
+.squad:hover::before {
+    visibility: visible;
+    opacity: 1;
+    top: 0;
+}

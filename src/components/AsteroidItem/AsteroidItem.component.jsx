@@ -4,14 +4,18 @@ import AsteroidImg from '../../assets/img/asteroid.svg';
 import DinoImg from '../../assets/img/dino.svg';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
+// Components
 const AsteroidItem = ({
 	isHazardous,
 	diameterInM,
 	name,
 	approachDate,
-	asteroidId,
-	distance: { unit, value }
+	id,
+	distance: { unit, value },
+	children
 }) => {
+	const match = useRouteMatch();
 	return (
 		<div className={`${s.item} ${isHazardous && s.hazardous}`}>
 			<div>
@@ -30,7 +34,7 @@ const AsteroidItem = ({
 			</div>
 			<div className={s.data}>
 				<div className={s.info}>
-					<Link className={s.link} to={asteroidId}>
+					<Link className={s.link} to={`${match.url}/${id}`}>
 						{name}
 					</Link>
 					<ul>
@@ -54,7 +58,7 @@ const AsteroidItem = ({
 					<div className={s.rate}>
 						Оценка: <p>{isHazardous ? 'опасен' : 'не опасен'}</p>
 					</div>
-					<button>На уничтожение</button>
+					{children}
 				</div>
 			</div>
 		</div>
@@ -62,7 +66,6 @@ const AsteroidItem = ({
 };
 AsteroidItem.propTypes = {
 	isHazardous: PropTypes.bool,
-	inLunar: PropTypes.bool,
 	diameterInM: PropTypes.string,
 	name: PropTypes.string,
 	approachDate: PropTypes.string,
@@ -70,6 +73,7 @@ AsteroidItem.propTypes = {
 		unit: PropTypes.string,
 		value: PropTypes.string
 	}),
-	asteroidId: PropTypes.string
+	id: PropTypes.string,
+	children: PropTypes.object
 };
 export default AsteroidItem;
