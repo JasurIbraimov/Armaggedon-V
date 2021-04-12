@@ -41,9 +41,22 @@ const AsteroidPage = ({ addToDestroyData, checkDestroyData }) => {
 		<div className={s.pageContainer}>
 			{data ? (
 				<div className={s.infoCard}>
+					<h2>{data.name}</h2>
 					<div className={s.selfInfo}>
-						<div>
-							<h2>{data.name}</h2>
+						<div className={s.imgContainer}>
+							<img
+								className={
+									data.diameterInM >= 850
+										? s.biggestAsteroidImg
+										: data.diameterInM >= 300
+										? s.biggerAsteroidImg
+										: s.smallAsteroidImg
+								}
+								src={AsteroidImg}
+								alt='Asteroid'
+							/>
+						</div>
+						<div className={s.selfData}>
 							<p className={data.isHazardous ? s.hazardous : s.safe}>
 								Оценка опасности:
 								<span>{data.isHazardous ? 'опасен' : 'не опасен'}</span>
@@ -51,27 +64,14 @@ const AsteroidPage = ({ addToDestroyData, checkDestroyData }) => {
 							<p>
 								Размер: <span>{data.diameterInM} м</span>
 							</p>
-							<div className={s.imgContainer}>
-								<img
-									className={
-										data.diameterInM >= 850
-											? s.biggestAsteroidImg
-											: data.diameterInM >= 300
-											? s.biggerAsteroidImg
-											: s.smallAsteroidImg
+							<div>
+								<CustomButton
+									onClick={() => addToDestroyData(data)}
+									btnLabel={
+										checkDestroyData(data.id) ? 'Помиловать' : 'На уничтожение'
 									}
-									src={AsteroidImg}
-									alt='Asteroid'
 								/>
 							</div>
-						</div>
-						<div>
-							<CustomButton
-								onClick={() => addToDestroyData(data)}
-								btnLabel={
-									checkDestroyData(data.id) ? 'Помиловать' : 'На уничтожение'
-								}
-							/>
 						</div>
 					</div>
 					<div className={s.approachInfo}>

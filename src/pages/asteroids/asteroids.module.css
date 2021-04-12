@@ -1,15 +1,14 @@
 .pageContainer {
-    padding: 26px 0px;
+    margin-top: 20px;
 }
 .filters {
     display: flex;
+    padding: 0 20px;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
 }
-.filters div {
-    display: flex;
-    align-items: center;
-}
+
 .filters input {
     margin-right: 10px;
     cursor: pointer;
@@ -34,4 +33,20 @@ button.activeFilter {
     padding: 0px 10px;
     height: 71vh;
     overflow-y: scroll;
+}
+@media (max-width: 648px) {
+    .filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+@media (max-width: 420px) {
+    .filters div:nth-child(2) {
+        display: block;
+        margin-top: 5px;
+    }
+    .filters div button[value='lunar'] {
+        margin-left: 0;
+        margin-top: 5px;
+    }
 }

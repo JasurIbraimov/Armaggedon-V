@@ -31,11 +31,14 @@ const App = () => {
 			return true;
 		}
 	};
+	const checkIfHazardousRemained = () => {
+		return destroyData.some((item) => item.isHazardous);
+	};
 	const countDestroyData = () => {
 		return destroyData.length;
 	};
 	const handleDestroy = () => {
-		if (destroyData.some((item) => item.isHazardous)) {
+		if (checkIfHazardousRemained()) {
 			setDestroyData((prev) => prev.filter((item) => !item.isHazardous));
 		} else {
 			setDestroyData([]);
@@ -62,6 +65,7 @@ const App = () => {
 				</Route>
 				<Route path='/destroy' exact>
 					<DestroyPage
+						hazardousDataRemain={checkIfHazardousRemained()}
 						handleDestroy={handleDestroy}
 						destroyData={destroyData}
 					/>

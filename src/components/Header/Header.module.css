@@ -1,12 +1,12 @@
 .header {
     display: flex;
     justify-content: space-between;
-    padding: 37px 0 24px 0;
+    padding: 37px 20px 24px 20px;
     border-bottom: 1px solid #000;
 }
 
 .title {
-    font-size: 36px;
+    font-size: 2rem;
     font-weight: 600;
     margin-bottom: 10px;
 }
@@ -22,3 +22,20 @@
     color: #000;
 }
 
+@media (max-width: 572px) {
+    .title {
+        font-size: 33px;
+    }
+    .header {
+        padding: 20px;
+        flex-direction: column;
+    }
+    .nav {
+        margin-top: 20px;
+    }
+}
+@media (max-width: 320px) { 
+    .title {
+        font-size: 28px;
+    }
+}

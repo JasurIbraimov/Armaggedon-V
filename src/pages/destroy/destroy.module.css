@@ -34,3 +34,13 @@
     margin-top: 10px;
     text-align: right;
 }
+
+@media (max-width: 425px) {
+    .tableContainer  {
+        height: 50vh;
+        padding: 0 10px;
+    }
+    .emptyContainer {
+        height: 50vh;
+    }
+}

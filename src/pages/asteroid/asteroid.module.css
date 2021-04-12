@@ -1,31 +1,47 @@
 .pageContainer {
-    padding: 24px 0;
+    margin-top: 20px;
 }
-
 .infoCard {
-    border: 1px solid rgb(209, 209, 209);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    height: 72vh;
+    display: flex;
+    flex-direction: column;
     border-radius: 10px;
+    padding: 20px 0px;
 }
 .selfInfo {
     padding: 20px;
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    height: 100%;
+    height: 300px;
 }
-.selfInfo h2 {
+.selfInfo div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.selfData {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+.infoCard h2 {
+    width: 100%;
     font-size: 30px;
     font-weight: 700;
+    text-align: center;
     margin-bottom: 20px;
 }
 .selfInfo p {
     border: 1px solid rgb(209, 209, 209);
     padding: 20px;
-    margin-bottom: 10px;
+    width: 100%;
+    margin-top: 10px;
 }
+.selfInfo p:nth-child(2) {
+    margin-bottom: 20px;
+}
+
 .selfInfo p span {
     margin-left: 5px;
     font-weight: 600;
@@ -35,10 +51,6 @@
 }
 .safe {
     border: 2px solid #27ae60 !important;
-}
-.imgContainer {
-    text-align: center;
-    margin-top: 30px;
 }
 
 .biggestAsteroidImg {
@@ -54,8 +66,54 @@
     height: 100px;
 }
 .approachInfo {
-    padding: 20px 10px 20px 0;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
+    padding: 20px 10px;
+    display: flex;
+}
+.approachInfo div {
+    width: 50%;
+    margin-right: 10px;
+    height: 300px;
 }
 
+.approachInfo div:last-child {
+    margin-right: 0;
+}
+@media (max-width: 582px) {
+    .approachInfo {
+        flex-direction: column;
+    }
+    .approachInfo div {
+        margin-right: 0;
+    }
+    .selfInfo p {
+        padding: 10px;
+    }
+    .approachInfo div {
+        width: 100%;
+    }
+    .approachInfo div:last-child {
+        margin-top: 50px;
+    }
+    .biggestAsteroidImg {
+        width: 200px;
+        height: 200px
+    }
+    .biggerAsteroidImg {
+        width: 175px;
+        height: 175px
+    }
+    .smallAsteroidImg {
+        width: 100px;
+        height: 100px;
+    }
+    
+}
+@media (max-width: 425px) {
+    .selfInfo {
+        flex-direction: column;
+        height: 100%;
+    }
+    .selfInfo p {
+        margin-top: 20px;
+    }
+}

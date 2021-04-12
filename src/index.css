@@ -10,9 +10,7 @@
     max-width: 920px;
     margin: 0 auto;
 }
-body {
-    overflow: hidden;
-}
+
 ul li {
     list-style-type: none;
 }

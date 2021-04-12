@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // Components
 import Squad from '../../components/Squad/Squad.component';
 import CustomEmpty from '../../components/CustomEmpty/CustomEmpty.component';
-const DestroyPage = ({ destroyData, handleDestroy }) => {
+const DestroyPage = ({ destroyData, handleDestroy, hazardousDataRemain }) => {
 	return (
 		<div className={s.pageContainer}>
 			{destroyData.length > 0 ? (
@@ -36,7 +36,16 @@ const DestroyPage = ({ destroyData, handleDestroy }) => {
 				</div>
 			)}
 			<div className={s.squadBtn}>
-				<Squad onClick={handleDestroy} />
+				<Squad
+					commandLabel={
+						destroyData.length > 0
+							? hazardousDataRemain
+								? 'Уничтожить опасные!'
+								: 'УНИЧТОЖИТЬ ВСЕ!!!'
+							: 'Наши враги пали!'
+					}
+					onClick={handleDestroy}
+				/>
 			</div>
 		</div>
 	);
@@ -44,6 +53,7 @@ const DestroyPage = ({ destroyData, handleDestroy }) => {
 
 DestroyPage.propTypes = {
 	destroyData: PropTypes.array,
-	handleDestroy: PropTypes.func
+	handleDestroy: PropTypes.func,
+	hazardousDataRemain: PropTypes.bool
 };
 export default DestroyPage;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // Components
 import CustomEmpty from '../CustomEmpty/CustomEmpty.component';
 const ApproachList = ({ title, dataList, isNamed }) => (
-	<div>
+	<div className={s.listContainer}>
 		<h3 className={s.title}>{title}</h3>
 		<ul className={s.list}>
 			{dataList.length > 0 ? (

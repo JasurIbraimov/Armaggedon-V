@@ -20,7 +20,7 @@
     transform: scale(1.1);
 }
 .squad::before {
-    content: 'Вызвать отряд!';
+    content: attr(data-command);
     width: 100%;
     color: #fff;
     padding: 10px;

@@ -18,7 +18,7 @@ const AsteroidItem = ({
 	const match = useRouteMatch();
 	return (
 		<div className={`${s.item} ${isHazardous && s.hazardous}`}>
-			<div>
+			<div className={s.imgContainer}>
 				<img
 					src={AsteroidImg}
 					alt='Asteroid falling'

@@ -1,10 +1,13 @@
+.listContainer {
+    height: 100%;
+}
 .title {
     font-size: 16px;
     border: 1px solid rgb(209, 209, 209);
     padding: 5px;
 }
 .list {
-    height: 250px;
+    height: 100%;
     border: 1px solid rgb(209, 209, 209);
     border-top: none;
     overflow-y: scroll;
