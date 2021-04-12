@@ -1,6 +1,7 @@
 .pageContainer {
-    height: 78vh;
     display: flex;
+    padding: 20px;
+    height: 75vh;
     justify-content: center;
     align-items: center;
 }
