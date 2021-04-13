@@ -1,6 +1,6 @@
 # Armaggedon V App 🦖 ☄️
 In this web-application you can get information about **NEO - near earth objects** like asteroids. 
-With the squad from the film ARMAGEDDON and the leader of them BRUCE WILLIS you can destroy this asteroids and save our Earth 🌎 (and dinosaurs 🦖) !
+With the squad from the film ARMAGEDDON and the leader of them BRUCE WILLIS you can destroy these asteroids and save our Earth 🌎 (and dinosaurs 🦖) !
 What are you looking for? Let's get started! 
 
 ## Some helpfull links:
