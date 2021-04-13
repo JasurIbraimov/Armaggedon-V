@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { exctractAPIDataList, exctractAPIDataByID } from './helpers';
-const API_KEY = 'rquGDUXJo8pWa2A7wfOt5cxr5J0xZdkfntDg7om8';
+const API_KEY = process.env.REACT_APP_NASA_API_KEY;
+console.log(process.env);
 const API_URL = 'https://api.nasa.gov/neo/rest/v1';
 const currentDate = new Date();
 const currentDay = currentDate.getDate();
@@ -23,6 +24,5 @@ export const getAllNEAsteroids = async (nextURLParam) => {
 
 export const getNEAsteroidInfoById = async (id) => {
 	const { data } = await axios.get(`${API_URL}/neo/${id}?api_key=${API_KEY}`);
-	window.BYID = exctractAPIDataByID(data);
 	return exctractAPIDataByID(data);
 };
