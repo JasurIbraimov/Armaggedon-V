@@ -107,8 +107,7 @@ const AsteroidsPage = ({ addToDestroyData, checkDestroyData }) => {
 								/>
 							</AsteroidItem>
 						))}
-					{loading}
-					{errored}
+					{loading || errored}
 				</div>
 			</div>
 		</div>
