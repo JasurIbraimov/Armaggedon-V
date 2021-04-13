@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { exctractAPIDataList, exctractAPIDataByID } from './helpers';
 const API_KEY = process.env.REACT_APP_NASA_API_KEY;
-console.log(process.env);
 const API_URL = 'https://api.nasa.gov/neo/rest/v1';
 const currentDate = new Date();
 const currentDay = currentDate.getDate();

@@ -43,7 +43,6 @@ const AsteroidsPage = ({ addToDestroyData, checkDestroyData }) => {
 					setFetchingURL(next);
 				})
 				.catch((e) => {
-					console.log(e);
 					setIsErrored(true);
 				})
 				.finally(() => {

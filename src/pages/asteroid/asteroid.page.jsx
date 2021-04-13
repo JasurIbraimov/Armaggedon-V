@@ -22,7 +22,6 @@ const AsteroidPage = ({ addToDestroyData, checkDestroyData }) => {
 					setData(data);
 				})
 				.catch((e) => {
-					console.log(e);
 					setIsErrored(true);
 				})
 				.finally(() => {
