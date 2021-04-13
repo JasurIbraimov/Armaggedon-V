@@ -28,12 +28,15 @@ button.activeFilter {
     text-decoration: none;
     font-weight: 600;
 }
-
+.data {
+    min-height: 101%;
+}
 .dataContainer {
     padding: 0px 10px;
-    height: 71vh;
     overflow-y: scroll;
+    height: 71vh;
 }
+
 @media (max-width: 648px) {
     .filters {
         flex-direction: column;

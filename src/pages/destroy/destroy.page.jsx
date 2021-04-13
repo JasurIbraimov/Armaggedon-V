@@ -41,7 +41,7 @@ const DestroyPage = ({ destroyData, handleDestroy, hazardousDataRemain }) => {
 						destroyData.length > 0
 							? hazardousDataRemain
 								? 'Уничтожить опасные!'
-								: 'УНИЧТОЖИТЬ ВСЕ!!!'
+								: 'Не щадить никого!!!'
 							: 'Наши враги пали!'
 					}
 					onClick={handleDestroy}

@@ -33,7 +33,7 @@ const ApproachList = ({ title, dataList, isNamed }) => (
 					</li>
 				))
 			) : (
-				<CustomEmpty emptyLabel='Cближении отсутствуют' />
+				<CustomEmpty emptyLabel='Cближения отсутствуют' />
 			)}
 		</ul>
 	</div>

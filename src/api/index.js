@@ -18,7 +18,6 @@ export const getAllNEAsteroids = async (nextURLParam) => {
 		}
 	} = await axios.get(URL);
 	const dataList = exctractAPIDataList(NEO);
-	window.NEO = dataList;
 	return { dataList, next };
 };
 

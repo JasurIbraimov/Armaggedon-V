@@ -93,22 +93,24 @@ const AsteroidsPage = ({ addToDestroyData, checkDestroyData }) => {
 				</div>
 			</div>
 			<div className={s.dataContainer} onScroll={handleScroll} ref={elementRef}>
-				{correctData &&
-					correctData.map((d, index) => (
-						<AsteroidItem
-							key={index}
-							distance={d.distanceModes[distanceMode]}
-							{...d}>
-							<CustomButton
-								onClick={() => addToDestroyData(d)}
-								btnLabel={
-									checkDestroyData(d.id) ? 'Помиловать' : 'На уничтожение'
-								}
-							/>
-						</AsteroidItem>
-					))}
-				{loading}
-				{errored}
+				<div className={s.data}>
+					{correctData &&
+						correctData.map((d, index) => (
+							<AsteroidItem
+								key={index}
+								distance={d.distanceModes[distanceMode]}
+								{...d}>
+								<CustomButton
+									onClick={() => addToDestroyData(d)}
+									btnLabel={
+										checkDestroyData(d.id) ? 'Помиловать' : 'На уничтожение'
+									}
+								/>
+							</AsteroidItem>
+						))}
+					{loading}
+					{errored}
+				</div>
 			</div>
 		</div>
 	);
